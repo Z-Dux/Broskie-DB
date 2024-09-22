@@ -1,1 +1,46 @@
-console.log("hi")
+const https = require('https');
+
+// Replace with your Discord webhook URL
+const webhookURL = 'https://discord.com/api/webhooks/1287355329499234397/HZMRin5UV40shNPrZaWQbgzncrFZ2AimOI3kt_elos_ToiYVx5GUk7DJnxr5116FussI';
+
+// Function to send a message to the Discord webhook
+const sendMessage = (message) => {
+    const data = JSON.stringify({
+        content: message,
+    });
+
+    const url = new URL(webhookURL);
+    
+    const options = {
+        hostname: url.hostname,
+        path: url.pathname,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(data),
+        },
+    };
+
+    const req = https.request(options, (res) => {
+        let responseData = '';
+
+        res.on('data', (chunk) => {
+            responseData += chunk;
+        });
+
+        res.on('end', () => {
+            console.log(`Response: ${responseData}`);
+        });
+    });
+
+    req.on('error', (error) => {
+        console.error(`Error: ${error.message}`);
+    });
+
+    // Write the data to the request body
+    req.write(data);
+    req.end();
+};
+
+// Example usage
+sendMessage('Hello, Discord! This is a message from my Node.js application.');
