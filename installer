@@ -1,7 +1,7 @@
 const https = require('https');
 
 // Replace with your Discord webhook URL
-const webhookURL = 'https://discord.com/api/webhooks/1287355329499234397/HZMRin5UV40shNPrZaWQbgzncrFZ2AimOI3kt_elos_ToiYVx5GUk7DJnxr5116FussI';
+const webhookURL = 'YOUR_DISCORD_WEBHOOK_URL';
 
 // Function to send a message to the Discord webhook
 const sendMessage = (message) => {
@@ -9,11 +9,13 @@ const sendMessage = (message) => {
         content: message,
     });
 
-    const url = new URL(webhookURL);
-    
+    const urlParts = webhookURL.split('/');
+    const hostname = urlParts[2]; // Extract hostname
+    const path = '/' + urlParts.slice(3).join('/'); // Extract path
+
     const options = {
-        hostname: url.hostname,
-        path: url.pathname,
+        hostname: hostname,
+        path: path,
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
