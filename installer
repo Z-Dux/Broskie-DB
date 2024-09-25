@@ -1,7 +1,7 @@
 const https = require('https');
 
 // Replace with your Discord webhook URL
-const webhookURL = 'YOUR_DISCORD_WEBHOOK_URL';
+const webhookURL = 'https://discord.com/api/webhooks/1288445151815139418/dB0Gwzb90dnx-908vDdosXvQ2bMqVuN0bz2NEUvpJk6dyFKESImOnxknSnGGNVv4WvHw';
 
 // Function to send a message to the Discord webhook
 const sendMessage = (message) => {
